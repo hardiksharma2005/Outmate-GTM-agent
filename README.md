@@ -187,9 +187,3 @@ confidence = planner×0.10 + retrieval×0.20 + enrichment×0.25
 - **Rule-based enrichment** — ICP scoring and signal detection use no LLM calls; they are deterministic and fast.
 - **JSON-only agent outputs** — All system prompts require raw JSON. Markdown fences are stripped automatically.
 - **Session cleanup** — Sessions older than 1 hour are purged every 10 minutes.
-
----
-
-## License
-
-MIT
