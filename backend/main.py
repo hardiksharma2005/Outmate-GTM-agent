@@ -41,8 +41,8 @@ logger = logging.getLogger(__name__)
 _shared_cache = GTMLRUCache(maxsize=256)
 _shared_rate_limiter = RateLimiter(capacity=60, refill_rate=1.0)
 _shared_llm = LLMClient(
-    api_key=os.getenv("ANTHROPIC_API_KEY", ""),
-    model=os.getenv("MODEL_NAME", "claude-sonnet-4-6"),
+    api_key=os.getenv("GROQ_API_KEY", ""),
+    model=os.getenv("MODEL_NAME", "llama-3.3-70b-versatile"),
     rate_limiter=_shared_rate_limiter,
     cache=_shared_cache,
 )
@@ -108,8 +108,8 @@ async def submit_query(request: GTMQueryRequest) -> GTMQueryResponse:
     Accept a GTM query. Creates a session, starts the orchestrator pipeline
     as a background task, and returns the session_id immediately.
     """
-    if not os.getenv("ANTHROPIC_API_KEY"):
-        raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY not configured")
+    if not os.getenv("GROQ_API_KEY"):
+        raise HTTPException(status_code=500, detail="GROQ_API_KEY not configured")
 
     session_id = request.session_id or str(uuid.uuid4())
     session_store.create_session(query=request.query, session_id=session_id)
